@@ -41,7 +41,7 @@ async def split_groups(context, *args):
 async def roll_dice(context, *args):
     dices = cmd_split.split_group(args)
     result = 0
-    foreach (dices as dice):
+    for dice in dices:
         intdice = int(dice)
         result = result + random.randint(1, intdice)
     await context.channel.send("You rolled a " + result)
