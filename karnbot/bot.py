@@ -36,4 +36,10 @@ async def split_groups(context, *args):
     await context.channel.send("\n".join(result))
 
 
+@bot.command(name="roll", help="randomly roll a d20")
+async def split_groups(context, *args):
+    result="Hi"
+    await context.channel.send("\n".join(result))
+
+
 bot.run(TOKEN)
