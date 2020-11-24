@@ -11,7 +11,7 @@ def split_group(people):
 
 
 def randomize_people(people):
-    return random.shuffle(people)
+    return random.sample(people, k=len(people))
 
 
 def get_num_tables(num_people):

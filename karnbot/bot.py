@@ -1,5 +1,6 @@
 # bot.py
 import os
+import traceback
 
 import discord
 from dotenv import load_dotenv
@@ -27,13 +28,34 @@ async def on_ready():
     )
 
 
-@bot.command(name="split", help="automatically splits people into games")
+def safe_command(*cmdargs, **cmdkwargs):
+    """Wrapper for bot.command, that will send errors to test_channel."""
+
+    def outter_wrapper(wrapped):
+        @bot.command(*cmdargs, **cmdkwargs)
+        async def wrapper(context, *args):
+            try:
+                return await wrapped(context, *args)
+            except Exception:
+                cmd_name = cmdkwargs["name"]
+                tb = traceback.format_exc()
+                await test_channel.send(
+                    f"Exception on bot command: {cmd_name}\n{tb}"
+                )
+
+        return wrapper
+
+    return outter_wrapper
+
+
+@safe_command(name="split", help="Automatically splits people into tables")
 async def split_groups(context, *args):
-    split_tables = cmd_split.split_group(args)
+    split_tables = cmd_split.split_group(list(args))
     result = []
     for (i, table) in enumerate(split_tables):
-        result.append(f"Table {i+1}: {','.join(table)}")
-    await context.channel.send("\n".join(result))
+        result.append(f"Table {i+1}: {', '.join(table)}")
+    table_string = "\n".join(result)
+    await context.channel.send(f"\n{table_string}")
 
 
 bot.run(TOKEN)
