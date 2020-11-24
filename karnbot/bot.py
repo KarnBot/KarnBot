@@ -27,7 +27,7 @@ async def on_ready():
 
     # Setup Config to get test channel details
     config = configparser.ConfigParser()
-    channel_id = config.get('Discord', 'TestChannel')
+    channel_id = config['Discord']['TestChannel']
 
     test_channel = bot.get_channel(channel_id)
     await bot.change_presence(
