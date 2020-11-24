@@ -29,8 +29,11 @@ async def on_ready():
 
 @bot.command(name="split", help="automatically splits people into games")
 async def split_groups(context, *args):
-    await test_channel.send(f"Split command registered, with args {args}")
-    cmd_split.split_group(args)
+    split_tables = cmd_split.split_group(args)
+    result = []
+    for (i, table) in enumerate(split_tables):
+        result.append(f"Table {i+1}: {','.join(table)}")
+    await context.channel.send("\n".join(result))
 
 
 bot.run(TOKEN)
