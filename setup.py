@@ -1,8 +1,4 @@
-from distutils.core import setup
+import setuptools
 
-setup(
-   name="KarnBot",
-   version="0.0.1",
-   packages=['karnbot'],
-   package_dir = {'karnbot': 'src'},
-)
+setuptools.setup()
+
