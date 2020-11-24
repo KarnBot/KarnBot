@@ -1,9 +1,9 @@
 import unittest
 
-from . import split
+import cmd_split
 
 
 class TestSplit(unittest.TestCase):
     def test_split_group(self):
-        split.split_group()
+        cmd_split.split_group()
         self.assertTrue(True)
