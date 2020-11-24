@@ -61,12 +61,12 @@ async def split_groups(context, *args):
 
 @bot.command(name="roll", help="randomly roll any list of dice")
 async def roll_dice(context, *args):
-    dices = cmd_split.split_group(args)
+    dices = cmd_split.split_group(list(args))
     result = 0
     for (i, dice) in enumerate(dices):
         intdice = int(dice)
         result = result + random.randint(1, intdice)
-    await context.channel.send("You rolled a " + result)
+    await context.channel.send(f"\n{"You rolled a " + result})
 
 
 bot.run(TOKEN)
