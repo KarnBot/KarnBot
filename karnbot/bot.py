@@ -1,5 +1,6 @@
 # bot.py
 import os
+import random
 
 import discord
 from dotenv import load_dotenv
@@ -36,10 +37,14 @@ async def split_groups(context, *args):
     await context.channel.send("\n".join(result))
 
 
-@bot.command(name="roll", help="randomly roll a d20")
-async def split_groups(context, *args):
-    result="Hi"
-    await context.channel.send("\n".join(result))
+@bot.command(name="roll", help="randomly roll any list of dice")
+async def roll_dice(context, *args):
+    dices = cmd_split.split_group(args)
+    result = 0
+    foreach (dices as dice):
+        intdice = int(dice)
+        result = result + random.randint(1, intdice)
+    await context.channel.send("You rolled a " + result)
 
 
 bot.run(TOKEN)
