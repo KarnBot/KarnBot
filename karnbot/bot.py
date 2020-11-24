@@ -1,8 +1,11 @@
 # bot.py
 import os
+import random
 import traceback
 
 import discord
+import configparser
+
 from dotenv import load_dotenv
 from discord.ext.commands import Bot
 
@@ -20,7 +23,13 @@ async def on_ready():
     print(f"Bot connected as {bot.user}")
     # Setup test channel
     global test_channel
-    test_channel = bot.get_channel(780611534833188905)
+
+    # Setup Config to get test channel details
+    config = configparser.ConfigParser()
+    config.read("config.ini")
+    channel_id = config["Discord"]["TestChannel"]
+
+    test_channel = bot.get_channel(channel_id)
     await bot.change_presence(
         activity=discord.Activity(
             type=discord.ActivityType.playing, name="Karn's Temporal Sundering"
@@ -56,6 +65,17 @@ async def split_groups(context, *args):
         result.append(f"Table {i+1}: {', '.join(table)}")
     table_string = "\n".join(result)
     await context.channel.send(f"\n{table_string}")
+
+
+@bot.command(name="roll", help="randomly roll any list of dice")
+async def roll_dice(context, *args):
+    dices = args
+    result = 0
+    for dice in dices:
+        intdice = int(dice)
+        result = result + random.randint(1, intdice)
+    response = "You rolled a *" + str(result) + "*."
+    await context.channel.send(f"\n{response}")
 
 
 bot.run(TOKEN)
