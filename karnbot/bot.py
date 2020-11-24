@@ -21,7 +21,7 @@ async def on_ready():
     print(f"Bot connected as {bot.user}")
     # Setup test channel
     global test_channel
-    test_channel = bot.get_channel(432709546042195994)
+    test_channel = bot.get_channel(780611534833188905)
     await bot.change_presence(
         activity=discord.Activity(
             type=discord.ActivityType.playing, name="Karn's Temporal Sundering"
