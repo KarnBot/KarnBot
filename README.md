@@ -11,4 +11,11 @@ Requirements
 
 Functionality
 =============
-TODO
+
+## Split up people into random groups
+
+```
+$split Glen Eric Ben Anson Mike
+Table 1: Mike Eric Ben
+Talbe 2: Anson Glen
+```
