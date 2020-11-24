@@ -4,7 +4,7 @@ import random
 import traceback
 
 import discord
-import ConfigParser
+import configparser
 
 from dotenv import load_dotenv
 from discord.ext.commands import Bot
@@ -26,7 +26,7 @@ async def on_ready():
     global test_channel
 
     # Setup Config to get test channel details
-    config = ConfigParser.ConfigParser()
+    config = configparser.ConfigParser()
     channel_id = config.get('Discord', 'TestChannel')
 
     test_channel = bot.get_channel(channel_id)
