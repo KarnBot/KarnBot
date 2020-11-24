@@ -3,16 +3,30 @@ import os
 
 import discord
 from dotenv import load_dotenv
+from discord.ext.commands import Bot
 
 load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
+TOKEN = os.getenv("DISCORD_TOKEN")
 
-client = discord.Client()
+bot = Bot(command_prefix="$")
+test_channel = None
 
-@client.event
+
+@bot.event
 async def on_ready():
-    channel = client.get_channel(780611534833188905)
-    e = discord.Embed(title='Bot Deploy test')
-    await channel.send('Hello', embed=e)
+    print(f"Bot connected as {bot.user}")
+    # Setup test channel
+    test_channel = bot.get_channel(780611534833188905)
+    await bot.change_presence(
+        activity=discord.Activity(
+            type=Discord.ActivityType.playing, name="Karn's Temporal Sundering"
+        )
+    )
 
-client.run(TOKEN)
+
+@bot.command(name="split", help="automatically splits people into games")
+async def splitGroups(context):
+    await test_channel.send(f"Split command registered")
+
+
+bot.run(TOKEN)
