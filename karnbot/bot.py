@@ -21,7 +21,6 @@ test_channel = None
 @bot.event
 async def on_ready():
     print(f"Bot connected as {bot.user}")
-    
     # Setup test channel
     global test_channel
 
