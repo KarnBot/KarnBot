@@ -66,7 +66,7 @@ async def roll_dice(context, *args):
     for dice in dices:
         intdice = int(dice)
         result = result + random.randint(1, intdice)
-    response = "You rolled a " + str(result)
+    response = "You rolled a *" + str(result) + "*."
     await context.channel.send(f"\n{response}")
 
 
