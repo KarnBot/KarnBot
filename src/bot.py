@@ -28,9 +28,9 @@ async def on_ready():
 
 
 @bot.command(name="split", help="automatically splits people into games")
-async def split_groups(context):
-    await test_channel.send(f"Split command registered")
-    cmd_split.split_group()
+async def split_groups(context, *args):
+    await test_channel.send(f"Split command registered, with args {args}")
+    cmd_split.split_group(args)
 
 
 bot.run(TOKEN)
