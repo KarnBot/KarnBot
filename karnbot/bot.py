@@ -61,7 +61,7 @@ async def split_groups(context, *args):
 
 @bot.command(name="roll", help="randomly roll any list of dice")
 async def roll_dice(context, *args):
-    dices = args.split()
+    dices = args
     result = 0
     for dice in dices:
         intdice = int(dice)
