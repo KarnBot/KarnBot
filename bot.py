@@ -5,6 +5,8 @@ import discord
 from dotenv import load_dotenv
 from discord.ext.commands import Bot
 
+from . import split
+
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 
@@ -25,8 +27,9 @@ async def on_ready():
 
 
 @bot.command(name="split", help="automatically splits people into games")
-async def splitGroups(context):
+async def split_groups(context):
     await test_channel.send(f"Split command registered")
+    split.split_group()
 
 
 bot.run(TOKEN)
