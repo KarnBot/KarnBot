@@ -11,6 +11,8 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
-    print(f'{client.user} has connected to Discord!')
+    channel = client.get_channel(780611534833188905)
+    e = discord.Embed(title='Bot Deploy test')
+    await channel.send('Hello', embed=e)
 
 client.run(TOKEN)
