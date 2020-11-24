@@ -28,10 +28,10 @@ jobs:
         pip install --editable .
     - name: Lint with pycodestyle
       run: |
-        pycodestyle src/ tests/
+        pycodestyle karnbot/ tests/
     - name: Lint with black
       run: |
-        black -t py36 --check src/ tests/
+        black -t py36 --check karnbot/ tests/
     - name: Test with pytest
       run: |
         pytest
