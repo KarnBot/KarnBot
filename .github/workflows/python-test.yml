@@ -31,7 +31,7 @@ jobs:
         pycodestyle karnbot/ tests/
     - name: Lint with black
       run: |
-        black -t py36 --check karnbot/ tests/
+        black -t py38 --check karnbot/ tests/
     - name: Test with pytest
       run: |
         pytest
