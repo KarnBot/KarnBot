@@ -29,9 +29,16 @@ jobs:
     - name: Lint with pycodestyle
       run: |
         pycodestyle karnbot/ tests/
-    - name: Lint with black
-      run: |
-        black -t py38 --check karnbot/ tests/
     - name: Test with pytest
       run: |
         pytest
+
+  black:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: psf/black@stable
+        with:
+        options: "--check --verbose"
+        src: "./karnbot"
+        version: "~= 22.0"
