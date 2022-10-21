@@ -1,14 +1,8 @@
 # Library commands for split
 import math
 import random
-from typing import List
 
-import disnake
-
-UserList = List[disnake.User]
-
-
-def split_group(people: UserList):
+def split_group(people):
     num_tables = get_num_tables(len(people))
     tables = [[] for _ in range(num_tables)]
     random_order = randomize_people(people)
