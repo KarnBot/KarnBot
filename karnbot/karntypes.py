@@ -1,3 +1,7 @@
 import disnake
 
-UserList = List[disnake.User]
+# from typing import List
+
+# Not implemented yet :()
+# UserList = List[disnake.User]
+UserList = str
