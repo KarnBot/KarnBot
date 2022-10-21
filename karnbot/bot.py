@@ -83,13 +83,27 @@ async def decklist(
     player: cmd_decklist.Players = commands.Param(
         name="player", description="Player to get decks for"
     ),
-    color_combination: cmd_decklist.ColorCombination = commands.Param(
-        name="colors", description="Color combination (C = colorless)"
+    w: bool = commands.param(
+        name="white", description="Does the deck contain White?"
+    ),
+    u: bool = commands.param(
+        name="blue", description="Does the deck contain Blue?"
+    ),
+    b: bool = commands.param(
+        name="black", description="Does the deck contain Black?"
+    ),
+    r: bool = commands.param(
+        name="red", description="Does the deck contain Red?"
+    ),
+    g: bool = commands.param(
+        name="green", description="Does the deck contain Green?"
     ),
 ):
     cmd_name = "decklist"
     try:
-        msg = cmd_decklist.get_deck(player, color_combination)
+        msg = cmd_decklist.get_deck(
+            player, cmd_decklist.get_combination(w, u, b, r, g)
+        )
         await context.response.send_message(f"\n{msg}")
     except Exception:
         await log_error(bot, cmd_name)
