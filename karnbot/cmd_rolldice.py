@@ -2,9 +2,9 @@ import random
 
 
 def roll_dice(num_dice: int, num_sides: int, bonus: int = 0):
-    rolls = [random.randint(1, num_sides) for _ in num_dice]
+    rolls = [random.randint(1, num_sides) for _ in range(num_dice)]
     result = sum(rolls) + bonus
-    rolls_msg = ", ".join(rolls)
+    rolls_msg = ", ".join(str(x) for x in rolls)
     bonus_msg = ""
     if bonus > 0:
         bonus_msg = f"+{bonus}"
