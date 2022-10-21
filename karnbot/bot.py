@@ -5,8 +5,9 @@ import traceback
 import disnake
 from disnake.ext import commands
 
-import cmd_split
+import cmd_decklist
 import cmd_rolldice
+import cmd_split
 from config import test_guild, test_channel_id
 from karnstatus import get_status
 
@@ -69,6 +70,26 @@ async def roll_dice(
     cmd_name = "roll"
     try:
         msg = cmd_rolldice.roll_dice(num_dice, num_sides, bonus=bonus)
+        await context.response.send_message(f"\n{msg}")
+    except Exception:
+        await log_error(bot, cmd_name)
+
+
+@bot.slash_command(
+    name="decklist", description="Get links to registered decklists"
+)
+async def decklist(
+    context: disnake.ApplicationCommandInteraction,
+    player: cmd_decklist.Players = commands.Param(
+        name="player", description="Player to get decks for"
+    ),
+    color_combination: cmd_decklist.ColorCombination = commands.Param(
+        name="colors", description="Color combination (C = colorless)"
+    ),
+):
+    cmd_name = "decklist"
+    try:
+        msg = cmd_decklist.get_deck(player, color_combination)
         await context.response.send_message(f"\n{msg}")
     except Exception:
         await log_error(bot, cmd_name)
