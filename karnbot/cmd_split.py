@@ -2,6 +2,7 @@
 import math
 import random
 
+
 def split_group(people):
     num_tables = get_num_tables(len(people))
     tables = [[] for _ in range(num_tables)]

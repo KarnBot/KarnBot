@@ -75,6 +75,7 @@ async def roll_dice(
         await log_error(bot, cmd_name)
 
 
+# Commands can't have more than 25 choices, so use the colors to generate the list.
 @bot.slash_command(
     name="decklist", description="Get links to registered decklists"
 )

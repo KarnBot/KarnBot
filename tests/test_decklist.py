@@ -4,6 +4,9 @@ import unittest
 from karnbot import cmd_decklist
 
 
+url = "https://tappedout.net/mtg-decks/midrange-breya-1/"
+
+
 class TestDecklist(unittest.TestCase):
     def test_get_decklist(self):
         result = cmd_decklist.get_deck(
@@ -11,7 +14,7 @@ class TestDecklist(unittest.TestCase):
         )
         self.assertEqual(
             result,
-            "glen - WUBR: Breya Bling - https://tappedout.net/mtg-decks/midrange-breya-1/",
+            f"glen - WUBR: Breya Bling - {url}",
         )
 
     def test_get_decklist_fail(self):
