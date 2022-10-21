@@ -24,8 +24,8 @@ async def on_ready():
     global test_channel
     test_channel = bot.get_channel(780611534833188905)
     await bot.change_presence(
-        activity=discord.Activity(
-            type=discord.ActivityType.playing, name="Karn's Temporal Sundering"
+        activity=disnake.Activity(
+            type=disnake.ActivityType.playing, name="Karn's Temporal Sundering"
         )
     )
 
