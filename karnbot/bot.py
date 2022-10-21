@@ -1,17 +1,19 @@
 # bot.py
 import os
+import string
 import traceback
 
-import discord
+import disnake
 from dotenv import load_dotenv
-from discord.ext.commands import Bot
+from disnake.ext import commands
 
 import cmd_split
+from karntypes import UserList
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 
-bot = Bot(command_prefix="$")
+bot = commands.InteractionBot(test_guilds=[780585690446561340])
 test_channel = None
 
 
@@ -32,7 +34,7 @@ def safe_command(*cmdargs, **cmdkwargs):
     """Wrapper for bot.command, that will send errors to test_channel."""
 
     def outter_wrapper(wrapped):
-        @bot.command(*cmdargs, **cmdkwargs)
+        @bot.slash_command(*cmdargs, **cmdkwargs)
         async def wrapper(context, *args):
             try:
                 return await wrapped(context, *args)
@@ -49,13 +51,13 @@ def safe_command(*cmdargs, **cmdkwargs):
 
 
 @safe_command(name="split", help="Automatically splits people into tables")
-async def split_groups(context, *args):
-    split_tables = cmd_split.split_group(list(args))
+async def split_groups(context, players: UserList):
+    split_tables = cmd_split.split_group(players)
     result = []
     for (i, table) in enumerate(split_tables):
         result.append(f"Table {i+1}: {', '.join(table)}")
     table_string = "\n".join(result)
-    await context.channel.send(f"\n{table_string}")
+    await context.response.send_message(f"\n{table_string}")
 
 
 bot.run(TOKEN)
