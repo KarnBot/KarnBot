@@ -7,6 +7,7 @@ import disnake
 from disnake.ext import commands
 
 import cmd_split
+import cmd_rolldice
 from karntypes import UserList
 
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -44,6 +45,12 @@ async def split_groups(context, players: UserList):
         cmd_name = "split"
         tb = traceback.format_exc()
         await test_channel.send(f"Exception on bot command: {cmd_name}\n{tb}")
+
+
+@bot.slash_command(name="roll", description="Randomly roll any list of dice")
+async def roll_dice(context, num_dice: int, num_sides: int, bonus: int = 0):
+    msg = cmd_rolldice.roll_dice(num_dice, num_sides, bonus=bonus)
+    await context.response.send_message(f"\n{msg}")
 
 
 bot.run(TOKEN)
