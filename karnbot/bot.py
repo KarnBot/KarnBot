@@ -4,13 +4,11 @@ import string
 import traceback
 
 import disnake
-from dotenv import load_dotenv
 from disnake.ext import commands
 
 import cmd_split
 from karntypes import UserList
 
-load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 
 bot = commands.InteractionBot(test_guilds=[780585690446561340])
